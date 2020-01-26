@@ -4,6 +4,10 @@
   justify-content: center;
 }
 
+.state {
+  cursor: pointer;
+}
+
 .fill0 {
   fill: rgba(0, 107, 166, 1);
 }

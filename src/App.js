@@ -1,41 +1,36 @@
 import React, { useState } from 'react';
 import './App.css';
 import State from './State';
+import Map from './Map';
 import STATE_SVG_PATHS from './state-svg-paths.js';
 
 function App() {
-  const [hoveredState, setHoveredState] = useState();
+  // const [hoveredState, setHoveredState] = useState();
 
-  const states = Object.keys(STATE_SVG_PATHS).map((state, index) => (
-    <State
-      key={state}
-      path={STATE_SVG_PATHS[state]}
-      state={state}
-      onHover={() => setHoveredState(state)}
-      fillIndex={index % 5}
-    />
-  ));
+  const getRandomState = () => {
+    const states = Object.values(STATE_SVG_PATHS).map(state => state.name);
+    return states[Math.floor(Math.random() * states.length)];
+  };
 
-  states.push(
-    states.splice(
-      states.indexOf(state => state === hoveredState),
-      1
-    )[0]
-  );
+  const [stateToGuess, setStateToGuess] = useState(getRandomState());
+
+  const mapStates = Object.keys(STATE_SVG_PATHS).map((stateCode, index) => {
+    const state = STATE_SVG_PATHS[stateCode];
+    return (
+      <State
+        key={stateCode}
+        path={state.path}
+        stateCode={stateCode}
+        // onClick={() => setHoveredState(state)}
+        fillIndex={state.fillIndex}
+      />
+    );
+  });
 
   return (
-    <div className="map">
-      <svg xmlns="http://www.w3.org/2000/svg" width="959" height="593">
-        <defs></defs>
-        <g className="state">{states}</g>
-        <path
-          id="frames"
-          fill="none"
-          stroke="#A9A9A9"
-          strokeWidth="2"
-          d="M215 493v55l36 45M0 425h147l68 68h85l54 54v46"
-        />
-      </svg>
+    <div>
+      <div>Where is {stateToGuess}?</div>
+      <Map>{mapStates}</Map>;
     </div>
   );
 }
