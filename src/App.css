@@ -6,36 +6,20 @@
 
 .state {
   cursor: pointer;
-}
-
-.fill0 {
-  fill: rgba(0, 107, 166, 1);
-}
-.fill1 {
   fill: rgba(4, 150, 255, 1);
 }
-.fill2 {
-  fill: rgba(255, 188, 66, 1);
-}
-.fill3 {
-  fill: rgba(216, 17, 89, 1);
-}
-.fill4 {
-  fill: rgba(143, 45, 86, 1);
+
+.state:hover {
+  fill: rgba(0, 107, 166, 1);
 }
 
-.fill0:hover {
-  fill: rgba(0, 107, 166, 0.5);
+.state.answer, .state.answer:hover {
+  fill: rgb(56, 199, 52);
 }
-.fill1:hover {
-  fill: rgba(4, 150, 255, 0.5);
+.state.correct, .state.correct:hover {
+  fill: rgba(255, 188, 66, 1);
 }
-.fill2:hover {
-  fill: rgba(255, 188, 66, 0.5);
+.state.incorrect, .state.incorrect:hover {
+  fill: rgba(216, 17, 89, 1);
 }
-.fill3:hover {
-  fill: rgba(216, 17, 89, 0.5);
-}
-.fill4:hover {
-  fill: rgba(143, 45, 86, 0.5);
-}
+
