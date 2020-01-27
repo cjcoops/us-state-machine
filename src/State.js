@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function State({ path, stateCode, onClick, classes }) {
-  console.log(classes);
-
+export default function State({ path, onClick, classes }) {
   return (
     <g
-      //   id={`${stateCode}-group`}
       dangerouslySetInnerHTML={{ __html: path }}
       className={`state ${classes}`}
       onClick={onClick}

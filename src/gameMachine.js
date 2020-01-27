@@ -10,22 +10,35 @@ const gameMachine = Machine({
   },
   states: {
     correct: {
-      on: { RESTART: 'guessing' }
+      on: {
+        RESTART: {
+          target: 'guessing',
+          actions: [
+            assign({
+              currentState: (context, event) => getRandomState()
+            })
+          ]
+        }
+      }
     },
     incorrect: {
-      on: { RESTART: 'guessing' }
+      on: {
+        RESTART: {
+          target: 'guessing',
+          actions: [
+            assign({
+              currentState: (context, event) => getRandomState()
+            })
+          ]
+        }
+      }
     },
     guessing: {
       on: {
         GUESS: [
           {
             target: 'correct',
-            // Only transition to 'searching' if the guard (cond) evaluates to true
-            // cond: searchValid, // or { type: 'searchValid' }
             cond: (context, event) => {
-              //   console.log(context);
-              //   console.log(event);
-
               return context.currentState.name === event.data;
             },
             actions: [

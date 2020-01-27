@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import State from './State';
 import Map from './Map';
+import Dialog from './Dialog';
 import STATE_SVG_PATHS from './state-svg-paths.js';
 import { useMachine } from '@xstate/react';
 import gameMachine from './gameMachine';
@@ -9,38 +10,50 @@ import gameMachine from './gameMachine';
 function App() {
   const [current, send] = useMachine(gameMachine);
 
-  console.log(current);
+  // const handleGuess = stateName => {
+  //   send({ type: 'GUESS', data: stateName });
+  // };
 
-  // const [stateToGuess, setStateToGuess] = useState(getRandomState());
+  useEffect(() => {
+    window.addEventListener('keydown', event => {
+      if (event.code === 'Space') {
+        console.log(event);
+        event.preventDefault();
+        send({ type: 'RESTART' });
+      }
+    });
+  }, [send]);
 
-  const handleGuess = stateName => {
-    send({ type: 'GUESS', data: stateName });
+  const getStateClass = (stateName, { value, context }) => {
+    if (value === 'guessing') {
+      return '';
+    }
+
+    const isIncorrectGuess =
+      value === 'incorrect' && context.guess === stateName;
+
+    if (isIncorrectGuess) {
+      return 'incorrect';
+    }
+
+    const isCorrectAnswer = context.currentState.name === stateName;
+
+    if (isCorrectAnswer) {
+      return 'answer';
+    }
+
+    return '';
   };
-
-  const restart = () => send({ type: 'RESTART' });
-
-  // const getStateClass = (stateName, {value, context}) => {
-  //   if (value === 'guessing') {
-  //     return ''
-  //   }
-  //   if (value === 'correct') {
-  //     if (context.currentState.name === stateName) {
-  //       return 'correct'
-  //     } else if ()
-  //   }
-  // }
 
   const mapStates = Object.keys(STATE_SVG_PATHS).map(stateCode => {
     const state = STATE_SVG_PATHS[stateCode];
 
-    const classes =
-      current.context.currentState.name === state.name ? current.value : '';
+    const classes = getStateClass(state.name, current);
 
     return (
       <State
         key={stateCode}
         path={state.path}
-        stateCode={stateCode}
         classes={classes}
         onClick={() => send({ type: 'GUESS', data: state.name })}
       />
@@ -48,26 +61,8 @@ function App() {
   });
 
   return (
-    <div>
-      {current.value === 'guessing' ? (
-        <div>Where is {current.context.currentState.name}?</div>
-      ) : null}
-      {current.value === 'correct' ? (
-        <div>
-          You are correct!{' '}
-          <span onClick={() => send({ type: 'RESTART' })}>
-            Click to play again
-          </span>
-        </div>
-      ) : null}
-      {current.value === 'incorrect' ? (
-        <div>
-          You are incorrect!{' '}
-          <span onClick={() => send({ type: 'RESTART' })}>
-            Click to play again
-          </span>
-        </div>
-      ) : null}
+    <div className="app">
+      <Dialog {...current} />
       <Map>{mapStates}</Map>;
     </div>
   );
