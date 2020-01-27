@@ -4,22 +4,22 @@
   justify-content: center;
 }
 
-.state {
+.province {
   cursor: pointer;
   fill: rgba(4, 150, 255, 1);
 }
 
-.state:hover {
+.province:hover {
   fill: rgba(0, 107, 166, 1);
 }
 
-.state.answer,
-.state.answer:hover {
+.province.answer,
+.province.answer:hover {
   fill: rgb(56, 199, 52);
 }
 
-.state.incorrect,
-.state.incorrect:hover {
+.province.incorrect,
+.province.incorrect:hover {
   fill: rgba(216, 17, 89, 1);
 }
 

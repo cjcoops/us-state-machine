@@ -5,7 +5,7 @@ function Dialog({ value, context }) {
 
   switch (value) {
     case 'guessing':
-      message = `Where is ${context.currentState.name}?`;
+      message = `Where is ${context.province}?`;
       break;
 
     case 'correct':

@@ -1,4 +1,4 @@
-const STATE_SVG_PATHS = {
+const PROVINCES = {
   AK: {
     name: 'Alaska',
     path:
@@ -256,4 +256,4 @@ const STATE_SVG_PATHS = {
   }
 };
 
-export default STATE_SVG_PATHS;
+export default PROVINCES;

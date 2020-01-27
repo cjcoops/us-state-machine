@@ -1,8 +1,8 @@
 import { Machine, assign } from 'xstate';
-import STATE_SVG_PATHS from './state-svg-paths.js';
+import PROVINCES from './provinceData.js';
 
 const restart = assign({
-  currentState: (context, event) => getRandomState()
+  province: (context, event) => getRandomProvince()
 });
 
 const guess = assign({
@@ -10,14 +10,14 @@ const guess = assign({
 });
 
 const isCorrectAnswer = (context, event) => {
-  return context.currentState.name === event.data;
+  return context.province === event.data;
 };
 
 const gameMachine = Machine({
   id: 'game',
   initial: 'guessing',
   context: {
-    currentState: getRandomState(),
+    province: getRandomProvince(),
     guess: undefined
   },
   states: {
@@ -55,9 +55,9 @@ const gameMachine = Machine({
   }
 });
 
-function getRandomState() {
-  const states = Object.values(STATE_SVG_PATHS);
-  return states[Math.floor(Math.random() * states.length)];
+function getRandomProvince() {
+  const provinces = Object.values(PROVINCES).map(province => province.name);
+  return provinces[Math.floor(Math.random() * provinces.length)];
 }
 
 export default gameMachine;

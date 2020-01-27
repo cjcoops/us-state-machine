@@ -1,10 +1,10 @@
 import React from 'react';
 
-export default function State({ path, onClick, classes }) {
+export default function Province({ path, onClick, provinceClass }) {
   return (
     <g
       dangerouslySetInnerHTML={{ __html: path }}
-      className={`state ${classes}`}
+      className={`province ${provinceClass}`}
       onClick={onClick}
     ></g>
   );
