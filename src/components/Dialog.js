@@ -5,15 +5,15 @@ function Dialog({ value, context }) {
 
   switch (value) {
     case 'guessing':
-      message = `Where is ${context.province}?`;
+      message = `Where is ${context.province}? 🤔`;
       break;
 
     case 'correct':
-      message = `Correct! 🤠🤠🤠Click anywhere to Play Again`;
+      message = `Correct! 🤠🤠🤠 Click anywhere to Play Again`;
       break;
 
     case 'incorrect':
-      message = ` Unlucky 😕Click anywhere to Try Again`;
+      message = ` Unlucky 😕 Click anywhere to Try Again`;
       break;
 
     default:
