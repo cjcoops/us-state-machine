@@ -1,6 +1,18 @@
 import { Machine, assign } from 'xstate';
 import STATE_SVG_PATHS from './state-svg-paths.js';
 
+const restart = assign({
+  currentState: (context, event) => getRandomState()
+});
+
+const guess = assign({
+  guess: (context, event) => event.data
+});
+
+const isCorrectAnswer = (context, event) => {
+  return context.currentState.name === event.data;
+};
+
 const gameMachine = Machine({
   id: 'game',
   initial: 'guessing',
@@ -13,11 +25,7 @@ const gameMachine = Machine({
       on: {
         RESTART: {
           target: 'guessing',
-          actions: [
-            assign({
-              currentState: (context, event) => getRandomState()
-            })
-          ]
+          actions: [restart]
         }
       }
     },
@@ -25,11 +33,7 @@ const gameMachine = Machine({
       on: {
         RESTART: {
           target: 'guessing',
-          actions: [
-            assign({
-              currentState: (context, event) => getRandomState()
-            })
-          ]
+          actions: [restart]
         }
       }
     },
@@ -38,22 +42,12 @@ const gameMachine = Machine({
         GUESS: [
           {
             target: 'correct',
-            cond: (context, event) => {
-              return context.currentState.name === event.data;
-            },
-            actions: [
-              assign({
-                guess: (context, event) => event.data
-              })
-            ]
+            cond: isCorrectAnswer,
+            actions: [guess]
           },
           {
             target: 'incorrect',
-            actions: [
-              assign({
-                guess: (context, event) => event.data
-              })
-            ]
+            actions: [guess]
           }
         ]
       }
