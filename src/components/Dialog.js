@@ -9,11 +9,11 @@ function Dialog({ value, context }) {
       break;
 
     case 'correct':
-      message = `Correct! Hit Space to Play Again`;
+      message = `Correct! 🤠🤠🤠Click anywhere to Play Again`;
       break;
 
     case 'incorrect':
-      message = ` Unlucky! Hit Space to Play Again`;
+      message = ` Unlucky 😕Click anywhere to Try Again`;
       break;
 
     default:

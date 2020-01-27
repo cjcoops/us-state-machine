@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import './App.css';
 
 import { useMachine } from '@xstate/react';
@@ -14,16 +14,11 @@ import PROVINCES from './provinceData';
 function App() {
   const [current, send] = useMachine(gameMachine);
 
-  console.log(current.history);
-
-  useEffect(() => {
-    window.addEventListener('keydown', event => {
-      if (event.code === 'Space') {
-        event.preventDefault();
-        send({ type: 'RESTART' });
-      }
-    });
-  }, [send]);
+  const handlePageClick = () => {
+    if (current.value !== 'guessing') {
+      send({ type: 'RESTART' });
+    }
+  };
 
   const getProvinceClass = (province, { value, context }) => {
     if (value === 'guessing') {
@@ -62,7 +57,7 @@ function App() {
   });
 
   return (
-    <div className="app">
+    <div className="app" onClick={handlePageClick}>
       <Dialog {...current} />
       <Map>{provinces}</Map>;
     </div>
