@@ -1,7 +1,19 @@
+.app {
+  display: grid;
+  grid-template-rows: 40px 1fr;
+}
+
+.dialog {
+  text-align: center;
+  font-weight: bold;
+  font-size: 20px;
+  padding-top: 30px;
+}
+
 .map {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-self: center;
+  width: 900px;
 }
 
 .province {
@@ -21,16 +33,4 @@
 .province.incorrect,
 .province.incorrect:hover {
   fill: rgba(216, 17, 89, 1);
-}
-
-.dialog {
-  text-align: center;
-  font-weight: bold;
-  font-size: 20px;
-  padding-top: 30px;
-}
-
-.app {
-  display: grid;
-  grid-template-rows: 40px 1fr;
 }

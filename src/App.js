@@ -14,6 +14,8 @@ import PROVINCES from './provinceData';
 function App() {
   const [current, send] = useMachine(gameMachine);
 
+  console.log(current.history);
+
   useEffect(() => {
     window.addEventListener('keydown', event => {
       if (event.code === 'Space') {

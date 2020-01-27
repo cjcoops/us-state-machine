@@ -3,7 +3,11 @@ import React from 'react';
 export function Map({ children }) {
   return (
     <div className="map">
-      <svg xmlns="http://www.w3.org/2000/svg" width="70%" viewBox="0 0 959 593">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="100%"
+        viewBox="0 0 959 593"
+      >
         <defs></defs>
         <g className="states">{children}</g>
         <path
