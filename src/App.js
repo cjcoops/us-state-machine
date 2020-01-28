@@ -58,8 +58,10 @@ function App() {
 
   return (
     <div className="app" onClick={handlePageClick}>
-      <Dialog {...current} />
-      <Map>{provinces}</Map>;
+      <div className="container">
+        <Dialog {...current} />
+        <Map>{provinces}</Map>;
+      </div>
     </div>
   );
 }

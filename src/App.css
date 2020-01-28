@@ -1,6 +1,8 @@
 .app {
-  display: grid;
-  grid-template-rows: 40px 1fr;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .dialog {
